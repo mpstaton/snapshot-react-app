@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-const Schema = mongoose.Schema;
 
 /*
 People and Persons and a Person are objects representing the static information related to
@@ -13,7 +12,7 @@ Person data, as well as add and manage their Contacts.
 Persons that are "Team Members" will be Administrators with Administrative permissions from their User Account.
 */
 
-var PersonSchema = new Schema({
+const PersonSchema = new mongoose.Schema({
   called: {
     type: String
   },
@@ -45,31 +44,31 @@ var PersonSchema = new Schema({
   ],
   currentContacts: [
     { type: mongoose.Schema.Types.ObjectId,
-      ref: 'Contacts',
+      ref: 'ContactCard',
     }
   ],
   priorContacts: [
     { type: mongoose.Schema.Types.ObjectId,
-      ref: 'Contacts',
+      ref: 'ContactCard',
     }
   ],
   personalContacts: [
     { type: mongoose.Schema.Types.ObjectId,
-      ref: 'Contacts',
+      ref: 'ContactCard',
     }
   ],
 });
 
-PersonSchema.virtual('fullName').get(function() {
-    return this.called + ' '  + this.surName;
-}).set(function(fullName) {
-    var parts = fullName.split(' ');
-    this.called = parts[0];
-    this.surName = parts[1];
-});
+// PersonSchema.virtual('fullName').get(function() {
+//     return this.called + ' '  + this.surName;
+// }).set(function(fullName) {
+//     var parts = fullName.split(' ');
+//     this.called = parts[0];
+//     this.surName = parts[1];
+// });
 
-PersonSchema.set('toObject', { virtuals: true });
+// PersonSchema.set('toObject', { virtuals: true });
 
-let Person = mongoose.model('Person', PersonSchema);
+export default mongoose.model('Person', PersonSchema)
 
-module.exports = {Person} 
+

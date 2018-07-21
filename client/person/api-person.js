@@ -1,13 +1,18 @@
 const create = (person) => {
+  console.log("We are in the api-person.js create function")
+  console.log(person)
     return fetch('/api/persons/', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: person
+        body: JSON.stringify(person)
       })
       .then((response) => {
+        console.log(`The response is:`)
+        console.log(response)
+        // console.log(response.json())
         return response.json()
       }).catch((err) => console.log(err))
   }

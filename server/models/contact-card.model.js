@@ -1,5 +1,4 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose'
 
 /* Contacts can be thought of as "ContactCards" or business cards,
 a data model for contact information that belongs to a Person.
@@ -7,7 +6,7 @@ A contact can be current or not current, based on whether or not there is an
 endDate.
 */
 
-var ContactCardSchema = new Schema({
+const ContactCardSchema = new mongoose.Schema({
   forPerson: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Person'
@@ -45,8 +44,6 @@ var ContactCardSchema = new Schema({
     type: String
   }
 });
-ContactCardSchema.set('toObject', { virtuals: true });
+//ContactCardSchema.set('toObject', { virtuals: true });
 
-let ContactCard = mongoose.model('ContactCard', ContactCardSchema);
-
-module.exports = {ContactCard}
+export default mongoose.model('ContactCard', ContactCardSchema);

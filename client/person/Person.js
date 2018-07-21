@@ -12,6 +12,7 @@ import Icon from 'material-ui/Icon'
 import {create} from './api-person.js'
 import Dialog, {DialogActions, DialogContent, DialogContentText, DialogTitle} from 'material-ui/Dialog'
 import {Link} from 'react-router-dom'
+import ContactCard from '../contact-card/ContactCard'
 
 const styles = theme => ({
     card: {
@@ -44,12 +45,14 @@ class Person extends Component {
     super()
           this.state = {
                 persons: [],
+                person: '',
                 called: '',
                 givenName: '',
                 surName: '',
                 email: '',
                 error: '',
-                open: false
+                open: false,
+                shouldContactCardBeDisplayed: false
             }
             this.match = match
           }
@@ -68,10 +71,15 @@ class Person extends Component {
         console.log(person)
         console.log(`${called.value}, ${surName.value}, ${email.value}`)
         create(person).then((data) => {
+          console.log("reached Create Person function")
+          console.log(data)
           if (data.error) {
             this.setState({error: data.error})
           } else {
-            this.props.addUpdate(data)
+            // this.props.addUpdate(data)
+            // person has been created successfully, show contact card
+            console.log("person has been created and contact card should display")
+            this.setState({shouldContactCardBeDisplayed: true, person: data})
           }
         })
       }
@@ -97,6 +105,9 @@ class Person extends Component {
               <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
             </CardActions>
             </Card>
+          {this.state.shouldContactCardBeDisplayed && 
+            <ContactCard classes={classes} person={this.state.person} />}
+
         </div>)
       }
 

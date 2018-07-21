@@ -1,5 +1,4 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+import mongoose from 'mongoose'
 
 /*
 Organizations are the central data object around much of the other objects in the schema.
@@ -13,7 +12,7 @@ It could be possible that the "description" should come from a more
 abstract cell system for managing versions of copy management.
 */
 
-var OrganizationSchema = new Schema({
+const OrganizationSchema = new mongoose.Schema({
   called: {
     type: String
   },
@@ -41,12 +40,11 @@ var OrganizationSchema = new Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Location'
   }],
-  people: [{
+  persons: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Person'
   }]
 });
 
-let Organization = mongoose.model('Organization', OrganizationSchema);
+export default mongoose.model('Organization', OrganizationSchema);
 
-module.exports = {Organization}

@@ -4,7 +4,7 @@ import personCtrl from '../controllers/person.controller'
 const router = express.Router()
 
 router.route('/api/persons')
-  .get(personCtrl.list)
   .post(personCtrl.create)
+  .get(personCtrl.list)
 
 export default router

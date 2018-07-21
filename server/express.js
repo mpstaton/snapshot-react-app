@@ -9,6 +9,9 @@ import Template from './../template'
 import userRoutes from './routes/user.routes'
 import authRoutes from './routes/auth.routes'
 import postRoutes from './routes/post.routes'
+import personRoutes from './routes/person.routes'
+import organizationRoutes from './routes/organization.routes'
+import contactCardRoutes from './routes/contact-card.routes'
 
 // modules for server side rendering
 import React from 'react'
@@ -47,6 +50,10 @@ app.use('/dist', express.static(path.join(CURRENT_WORKING_DIR, 'dist')))
 app.use('/', userRoutes)
 app.use('/', authRoutes)
 app.use('/', postRoutes)
+app.use('/', personRoutes)
+app.use('/', organizationRoutes)
+app.use('/', contactCardRoutes)
+
 
 app.get('*', (req, res) => {
    const sheetsRegistry = new SheetsRegistry()
