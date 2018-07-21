@@ -62,15 +62,16 @@ class Person extends Component {
     clickSubmit = () => {
         const person = {
           called: this.state.called || undefined,
-          surName: this.state.surName || undefined,
+          surName: this.state.surName|| undefined,
           email: this.state.email || undefined
         }
-        console.log(`${called}, ${surName}, ${email}`)
+        console.log(person)
+        console.log(`${called.value}, ${surName.value}, ${email.value}`)
         create(person).then((data) => {
           if (data.error) {
             this.setState({error: data.error})
           } else {
-            this.setState({error: '', open: true})
+            this.props.addUpdate(data)
           }
         })
       }
@@ -87,6 +88,11 @@ class Person extends Component {
               <TextField id="surName" label="surName" className={classes.textField} value={this.state.surName} onChange={this.handleChange('surName')} margin="normal"/><br/>
               <TextField id="email" type="email" label="Email" className={classes.textField} value={this.state.email} onChange={this.handleChange('email')} margin="normal"/><br/>
             </CardContent>
+            <br/> {
+            this.state.error && (<Typography component="p" color="error">
+              <Icon color="error" className={classes.error}>error</Icon>
+              {this.state.error}</Typography>)
+          }
             <CardActions>
               <Button color="primary" variant="raised" onClick={this.clickSubmit} className={classes.submit}>Submit</Button>
             </CardActions>

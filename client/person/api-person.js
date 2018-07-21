@@ -5,7 +5,7 @@ const create = (person) => {
           'Accept': 'application/json',
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(person)
+        body: person
       })
       .then((response) => {
         return response.json()
