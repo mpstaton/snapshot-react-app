@@ -76,6 +76,8 @@ const styles = theme => ({
 
         render() {
             const {classes} = this.props
+            console.log("organizationnssss")
+            console.log(this.state.organizations)
             return (<div>
                 <Card className={classes.card}>
                 <CardContent>

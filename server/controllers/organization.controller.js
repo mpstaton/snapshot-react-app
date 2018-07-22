@@ -17,6 +17,18 @@ const create = (req, res, next) => {
     })
   }
 
+const list = (req, res) => {
+  Organization.find((err, organizations) => {
+    if (err) {
+      return res.status(400).json({
+        error: errorHandler.getErrorMessage(err)
+      })
+    }
+    res.json(organizations)
+  })
+}
+
   export default {
-    create
+    create,
+    list
   }

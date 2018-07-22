@@ -5,6 +5,6 @@ const router = express.Router()
 
 router.route('/api/organizations')
   .post(organizationCtrl.create)
-//  .get(organizationCtrl.list)
+  .get(organizationCtrl.list)
 
 export default router

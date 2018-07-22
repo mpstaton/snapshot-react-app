@@ -17,6 +17,15 @@ const create = (organization) => {
         }).catch((err) => console.log(err))
     }
 
+    const list = () => {
+      return fetch('/api/organizations/', {
+        method: 'GET',
+      }).then(response => {
+        return response.json()
+      }).catch((err) => console.log(err))
+    }
+
     export {
-        create
+        create,
+        list
       }
