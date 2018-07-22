@@ -45,9 +45,6 @@ const styles = theme => ({
       super(props)
         console.log("props")
         console.log(this.props)
-        // this.getOrganizations()
-        console.log("ORGANIZATIONS ARE:")
-        console.log(this.props.organizations)
         this.state = {
                 organizations: this.props.organizations,
                 forPerson: this.props.person,
@@ -61,14 +58,6 @@ const styles = theme => ({
             }
             // this.match = match
         }
-
-        getOrganizations() {
-            console.log("fetching organizations from ContactCard")
-            list()
-            .then(data => console.log(data))
-            .then(data => this.setState({ organizations: data }, () => console.log("SET ORGANIZATIONS")) )
-        }
-
 
         handleChange = name => event => {
             this.setState({[name]: event.target.value})
