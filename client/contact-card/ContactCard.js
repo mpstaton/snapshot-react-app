@@ -10,6 +10,7 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 import Icon from 'material-ui/Icon'
 import {create} from './api-contact-card.js'
+import {listOrganizations} from '../organization/api-organization'
 import Autocomplete from 'react-autocomplete'
 
 const styles = theme => ({
@@ -50,7 +51,8 @@ const styles = theme => ({
         console.log("props")
         console.log(this.props)
         this.state = {
-                organizations: this.props.organizations,
+                organizations: this.props.organizations || null,
+                persons: this.props.persons || null,
                 forPerson: this.props.person || null,
                 oid: '',
                 atOrganization: '',
@@ -61,6 +63,16 @@ const styles = theme => ({
                 open: false
             }
             // this.match = match
+        }
+
+        componentWillMount() {
+            console.log("We're in ComponentWillMount of ContactCard")
+            if (this.props.organizations === null) {
+                console.log("Organizations is null, running listOrganizations")
+                listOrganizations()
+                    .then((organizations) => {this.setState({organizations: organizations})})
+            }
+            console.log(this.state.organizations)
         }
 
         handleChange = name => event => {
@@ -108,7 +120,6 @@ const styles = theme => ({
         render() {
             const classes = this.props.classes;
             console.log("Inside the ContactCard.js Render")
-            console.log(this.state.contactCard)
             return (<div>
                 <Card className={classes.card}>
                     <CardContent>

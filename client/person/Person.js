@@ -10,7 +10,7 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 import Icon from 'material-ui/Icon'
 import {create} from './api-person.js'
-import {list} from '../organization/api-organization.js'
+import {listOrganizations} from '../organization/api-organization.js'
 import Dialog, {DialogActions, DialogContent, DialogContentText, DialogTitle} from 'material-ui/Dialog'
 import {Link} from 'react-router-dom'
 import ContactCard from '../contact-card/ContactCard'
@@ -85,7 +85,7 @@ class Person extends Component {
             // this.props.addUpdate(data)
             // person has been created successfully, show contact card
             console.log("person has been created and contact card should display")
-            list()
+            listOrganizations()
             .then(dataOrg => this.setState({ organizations: dataOrg, shouldContactCardBeDisplayed: true, person: data }))
             // this.setState({shouldContactCardBeDisplayed: true, person: data})
           }

@@ -17,7 +17,7 @@ const create = (organization) => {
         }).catch((err) => console.log(err))
     }
 
-    const list = () => {
+    const listOrganizations = () => {
       return fetch('/api/organizations/', {
         method: 'GET',
       }).then(response => {
@@ -27,5 +27,5 @@ const create = (organization) => {
 
     export {
         create,
-        list
+        listOrganizations
       }
