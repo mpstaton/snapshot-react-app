@@ -65,18 +65,9 @@ class Person extends Component {
         this.setState({[name]: event.target.value})
       }
 
-      getOrganizations() {
-        console.log("fetching organizations from ContactCard")
-        list()
-        .then(data => console.log(data))
-        .then(data => this.setState({ organizations: data }, () => console.log("SET ORGANIZATIONS")) )
-    }
+  
 
-    // componentWillMount() {
-    //   console.log("COMPONENT WILL MOUNT")
-    //   this.getOrganizations()
-    // }
-    
+
     clickSubmit = () => {
         const person = {
           called: this.state.called || undefined,
@@ -95,7 +86,7 @@ class Person extends Component {
             // person has been created successfully, show contact card
             console.log("person has been created and contact card should display")
             list()
-            .then(dataOrg => this.setState({ organizations: dataOrg, shouldContactCardBeDisplayed: true, person: data }, () => console.log("SET ORGANIZATIONS")) )
+            .then(dataOrg => this.setState({ organizations: dataOrg, shouldContactCardBeDisplayed: true, person: data }))
             // this.setState({shouldContactCardBeDisplayed: true, person: data})
           }
         })

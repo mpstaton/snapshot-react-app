@@ -17,6 +17,16 @@ const create = (contactCard) => {
         }).catch((err) => console.log(err))
     }
 
+const list = () => {
+  console.log("We are in the api-contact-card.js list function")
+      return fetch('/api/contact-cards/', {
+        method: 'GET',
+      }).then(response => {
+        return response.json()
+      }).catch((err) => console.log(err))
+    }
+
     export {
-        create
+        create,
+        list
       }

@@ -10,7 +10,6 @@ import TextField from 'material-ui/TextField'
 import Typography from 'material-ui/Typography'
 import Icon from 'material-ui/Icon'
 import {create} from './api-contact-card.js'
-import {list} from '../organization/api-organization.js'
 import Autocomplete from 'react-autocomplete'
 
 const styles = theme => ({
@@ -33,6 +32,11 @@ const styles = theme => ({
         marginRight: theme.spacing.unit,
         width: 300
       },
+      autoComplete: {
+        marginLeft: theme.spacing.unit,
+        marginRight: theme.spacing.unit,
+        width: 300
+      },
       submit: {
         margin: 'auto',
         marginBottom: theme.spacing.unit * 2
@@ -47,7 +51,7 @@ const styles = theme => ({
         console.log(this.props)
         this.state = {
                 organizations: this.props.organizations,
-                forPerson: this.props.person,
+                forPerson: this.props.person || null,
                 oid: '',
                 atOrganization: '',
                 title: '',
@@ -92,24 +96,33 @@ const styles = theme => ({
             return org.called
           }
 
+        getPersonNameFromId(pId) {
+            if (pId.length !== 24) return ""
+            let persons = this.state.persons
+            let org = persons.find((p) => {
+                if (p._id === pId) return p
+            })
+            return p.called
+        }
+
         render() {
             const classes = this.props.classes;
-            console.log("organizationnssss")
-            console.log(this.state.organizations)
+            console.log("Inside the ContactCard.js Render")
+            console.log(this.state.contactCard)
             return (<div>
                 <Card className={classes.card}>
                     <CardContent>
                     <Typography type="headline" component="h2" className={classes.title}>
-                        Add a ContactCard to Person {this.props.person.called}
+                        Add a ContactCard
                     </Typography>
                     <TextField id="title" label="Title" className={classes.textField} value={this.state.title} onChange={this.handleChange('title')} margin="normal"/><br/>
                     <TextField id="email" type="email" label="Email" className={classes.textField} value={this.state.email} onChange={this.handleChange('email')} margin="normal"/><br/>
-                    <p>hello</p>
                     {this.state.organizations && this.state.organizations.map((org) => {
                         <p>{org.called}</p>
                     })}
                     {this.state.organizations &&
                     <Autocomplete
+                        className={classes.autoComplete}
                         getItemValue={ org => `${org._id}` }
                         items= {this.state.organizations}
                         shouldItemRender={(org, ovalue) => org.called.toLowerCase().indexOf(ovalue.toLowerCase()) > -1}
@@ -123,6 +136,24 @@ const styles = theme => ({
                         onSelect= { (oid) => {
                         let ovalue = this.getOrgNameFromId(oid)
                         return this.setState({ oid, ovalue})
+                        }}
+                    />}
+                    {this.state.persons &&
+                    <Autocomplete
+                        className={classes.autoComplete}
+                        getItemValue={ p => `${p._id}` }
+                        items= {this.state.persons}
+                        shouldItemRender={( p , pvalue) => p.called.toLowerCase().indexOf(pvalue.toLowerCase()) > -1}
+                        renderItem={(p, isHighlighted) =>
+                        <div key={ p._id } style={{ background: isHighlighted ? 'lightgray' : 'white' }}>
+                            {p.called}
+                        </div>
+                        }
+                        value={this.state.pvalue}
+                        onChange={(e) => this.setState({ pvalue: e.target.value})}
+                        onSelect= { (pid) => {
+                        let pvalue = this.getPersonNameFromId(pid)
+                        return this.setState({ pid, pvalue})
                         }}
                     />}
                     </CardContent>
