@@ -40,7 +40,7 @@ const create = (req, res, next) => {
         })
       }
       res.json(persons)
-    }).select('name email updated created')
+    })
   }
 
   export default {

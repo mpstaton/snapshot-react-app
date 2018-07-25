@@ -56,6 +56,7 @@ const styles = theme => ({
                 persons: this.props.persons || null,
                 forPerson: this.props.person || null,
                 oid: '',
+                pid: '',
                 atOrganization: '',
                 title: '',
                 email: '',
@@ -93,7 +94,7 @@ const styles = theme => ({
             }
 
         clickSubmit = () => {
-            console.log(this.state.forPerson._id)
+            //console.log(this.state.forPerson._id)
             const contactCard = {
                 forPerson: this.state.forPerson || undefined,
                 atOrganization: this.state.oid|| undefined,
@@ -125,6 +126,8 @@ const styles = theme => ({
             if (pId.length !== 24) return ""
             let persons = this.state.persons
             let p = persons.find((p) => {
+                console.log("We are in getPersonNameFromId")
+                console.log(p)
                 if (p._id === pId) return p
             })
             return p.called
@@ -162,7 +165,7 @@ const styles = theme => ({
                         return this.setState({ oid, ovalue})
                         }}
                     />}
-                    {this.state.persons &&
+                    {this.state.persons && !this.state.forPerson &&
                     <Autocomplete
                         className={classes.autoComplete}
                         getItemValue={ p => `${p._id}` }
@@ -177,7 +180,7 @@ const styles = theme => ({
                         onChange={(e) => this.setState({ pvalue: e.target.value})}
                         onSelect= { (pid) => {
                         let pvalue = this.getPersonNameFromId(pid)
-                        return this.setState({ pid, pvalue})
+                        return this.setState({pid, pvalue})
                         }}
                     />}
                     </CardContent>
