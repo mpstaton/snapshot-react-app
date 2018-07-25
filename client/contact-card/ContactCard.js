@@ -124,7 +124,7 @@ const styles = theme => ({
         getPersonNameFromId(pId) {
             if (pId.length !== 24) return ""
             let persons = this.state.persons
-            let org = persons.find((p) => {
+            let p = persons.find((p) => {
                 if (p._id === pId) return p
             })
             return p.called
