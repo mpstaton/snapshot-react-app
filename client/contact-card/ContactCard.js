@@ -46,7 +46,7 @@ const styles = theme => ({
 
   class ContactCard extends Component {
     constructor(props) {
-  
+
       super(props)
         console.log("props")
         console.log(this.props)
@@ -66,13 +66,15 @@ const styles = theme => ({
         }
 
         componentWillMount() {
-            console.log("We're in ComponentWillMount of ContactCard")
-            if (this.props.organizations === null) {
+              if (this.props.organizations === null) {
                 console.log("Organizations is null, running listOrganizations")
                 listOrganizations()
-                    .then((organizations) => {this.setState({organizations: organizations})})
+                .then((organizations) => {
+                  console.log('ORGANIZATIONS');
+                  console.log(organizations)
+                  this.setState({organizations: organizations})
+                })
             }
-            console.log(this.state.organizations)
         }
 
         handleChange = name => event => {
