@@ -11,6 +11,7 @@ import Typography from 'material-ui/Typography'
 import Icon from 'material-ui/Icon'
 import {create} from './api-contact-card.js'
 import {listOrganizations} from '../organization/api-organization'
+import {listPersons} from '../person/api-person'
 import Autocomplete from 'react-autocomplete'
 
 const styles = theme => ({
@@ -66,7 +67,7 @@ const styles = theme => ({
         }
 
         componentWillMount() {
-              if (this.props.organizations === null) {
+              if (this.state.organizations === null) {
                 console.log("Organizations is null, running listOrganizations")
                 listOrganizations()
                 .then((organizations) => {
@@ -75,6 +76,16 @@ const styles = theme => ({
                   this.setState({organizations: organizations})
                 })
             }
+              if (this.state.persons === null) {
+                  console.log("Persons is null, running listPersons")
+                  listPersons()
+                  .then((persons) => {
+                      console.log("PERSONS")
+                      console.log(persons)
+                      this.setState({persons: persons})
+                  })
+
+              }
         }
 
         handleChange = name => event => {

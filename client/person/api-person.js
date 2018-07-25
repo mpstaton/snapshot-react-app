@@ -17,7 +17,7 @@ const create = (person) => {
       }).catch((err) => console.log(err))
   }
   
-  const list = () => {
+  const listPersons = () => {
     return fetch('/api/persons/', {
       method: 'GET',
     }).then(response => {
@@ -82,7 +82,7 @@ const create = (person) => {
   
   export {
     create,
-    list,
+    listPersons,
     read,
     update,
     remove,
